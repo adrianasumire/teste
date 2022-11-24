@@ -1,0 +1,29 @@
+FROM drisumire/dotnet5:latest
+
+RUN apt-get update
+RUN apt-get install openssh-server -y && rm -rf /var/lib/apt/lists/*
+RUN mkdir -p /app
+RUN cd /app && git clone https://github.com/bootcamp-impacta-grupo-a/backend-doai.git
+RUN dotnet dev-certs https
+WORKDIR /app/backend-doai/DoaiApi
+RUN cd /app && git clone https://github.com/adrianasumire/teste.git 
+
+# workdir for ssh
+RUN mkdir -p /var/run/sshd
+
+# troca a senha do root
+RUN echo 'root:Doa!' | chpasswd
+
+# generate server keys
+RUN ssh-keygen -A
+
+# allow root to login
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
+
+ENV NOTVISIBLE "in users profile"
+RUN echo "export VISIBLE=now" >> /etc/profile
+
+EXPOSE 22 80
+
+# run ssh server
+CMD ["/usr/sbin/sshd", "-D"]

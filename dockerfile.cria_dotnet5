@@ -1,0 +1,7 @@
+FROM mcr.microsoft.com/dotnet/sdk:6.0
+
+RUN apt-get update && apt-get install -y net-tools nginx
+RUN mkdir -p /usr/share/dotnet/dotnet_5_0
+COPY apoio /usr/share/dotnet/dotnet_5_0/.
+RUN /usr/share/dotnet/dotnet_5_0/install_dotnet5.sh
+RUN rm -f /usr/share/dotnet/dotnet_5_0/install_dotnet5.sh /usr/share/dotnet/dotnet_5_0/dotnet-sdk-5.0.408-linux-x64.tar.gz /usr/share/dotnet/dotnet_5_0/libssl1.0.0_1.0.2n-1ubuntu5.10_amd64.deb
