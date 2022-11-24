@@ -6,10 +6,8 @@ RUN mkdir -p /app
 RUN cd /app && git clone https://github.com/bootcamp-impacta-grupo-a/backend-doai.git
 RUN dotnet dev-certs https
 WORKDIR /app/backend-doai/DoaiApi
-RUN cd /app && git clone https://github.com/adrianasumire/teste.git  && chmod 777 *
+RUN cd /app && git clone https://github.com/adrianasumire/teste.git  && chmod 777 /app/teste/*
 RUN /app/teste/prepara_backend.sh
-CMD /app/teste/inicia_dotnet.sh
-CMD nginx
 
 # workdir for ssh
 RUN mkdir -p /var/run/sshd
