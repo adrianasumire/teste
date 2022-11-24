@@ -1,6 +1,6 @@
 server {
     listen        80;
-    server_name   projetodoaiback.eastus.azurecontainer.io *projetodoaiback.eastus.azurecontainer.io;
+    server_name   projetodoaiback;
     location / {
         proxy_pass         http://localhost:5000;
         proxy_http_version 1.1;
